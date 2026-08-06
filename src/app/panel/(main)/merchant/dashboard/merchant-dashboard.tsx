@@ -152,63 +152,65 @@ function DashboardContent({
 	}
 
 	return (
-		<div className="flex flex-col gap-6">
-			<div>
-				<div className="text-xs text-muted-foreground mb-2">Visão Geral / Dashboard</div>
-				<div className="flex items-center justify-between">
-					<h1 className="text-xl font-bold text-foreground">Dashboard</h1>
-				</div>
-			</div>
-
+		<div className="flex flex-col gap-5">
+			{/* Page header — breadcrumb + title */}
 			<div className="flex items-center justify-between">
-				<div className="flex items-center gap-4">
-					<label className="mockup-toolbar-label">Período</label>
+				<div>
+					<p className="text-xs text-muted-foreground mb-1">Visão Geral / Dashboard</p>
+					<h1 className="text-base font-semibold text-foreground leading-tight">Dashboard</h1>
+				</div>
+
+				{/* Toolbar — period + layout — on same line */}
+				<div className="flex items-center gap-2">
+					<span className="mockup-toolbar-label hidden lg:block">Período</span>
 					<select
 						value={selectedPeriod}
 						onChange={(e) => onPeriodChange(e.target.value as DashboardPeriod)}
-						className="mockup-select"
+						className="mockup-period-select"
 					>
 						{PERIOD_OPTIONS.map((opt) => (
 							<option key={opt.key} value={opt.key}>{opt.label}</option>
 						))}
 					</select>
-				</div>
-				<div className="flex items-center gap-3">
 					<DashboardLayoutPicker layout={layout} onLayoutChange={changeLayout} />
 				</div>
 			</div>
 
+			{/* Main KPIs — 4 col grid */}
 			<div className="mockup-kpi-grid">
 				{mainKpis}
 			</div>
 
+			{/* Dynamic sections by layout */}
 			{renderSections()}
 
+			{/* Secondary KPIs */}
 			<div className="mockup-kpi-grid mockup-kpi-grid-secondary">
 				{secondaryKpis}
 			</div>
 
-			<div className="flex items-center justify-between border-t border-border pt-4">
+			{/* Footer status — cache info */}
+			<div className="flex items-center justify-between pt-3 border-t border-border">
 				<div className="flex items-center gap-3">
 					{cacheInfo.isProcessing && (
-						<div className="flex items-center gap-2 rounded-full bg-warning/10 px-3 py-1">
-							<div className="h-3 w-3 animate-spin rounded-full border-2 border-warning border-t-transparent" />
-							<span className="text-xs font-medium text-warning">Atualizando...</span>
+						<div className="flex items-center gap-1.5">
+							<div className="h-2.5 w-2.5 animate-spin rounded-full border-2 border-[var(--warning)] border-t-transparent" />
+							<span className="text-xs text-muted-foreground">Processando...</span>
 						</div>
 					)}
 					{cacheInfo.lastUpdatedAt && (
 						<div className="flex items-center gap-1.5">
-							<span className="text-xs text-muted-foreground">Atualizado {formatRelativeTime(cacheInfo.lastUpdatedAt)}</span>
+							<span className="text-xs text-muted-foreground">
+								Atualizado {formatRelativeTime(cacheInfo.lastUpdatedAt)}
+							</span>
 							<TooltipProvider>
 								<Tooltip>
 									<TooltipTrigger className="inline-flex cursor-help">
 										<Icon icon={HelpCircleIcon} className="icon-xs text-muted-foreground" />
 									</TooltipTrigger>
 									<TooltipContent side="top" className="max-w-72 text-xs">
-										<span className="font-medium">Como funciona a atualização?</span>
-										<br />
-										O <strong>saldo</strong> é sempre atualizado em tempo real. As demais estatísticas são atualizadas a
-										cada {cacheInfo.cacheDurationMinutes} minutos.
+										<span className="font-medium">Como funciona a atualização?</span>{' '}
+										O saldo é atualizado em tempo real. Demais métricas: a cada {cacheInfo.cacheDurationMinutes} min.
 									</TooltipContent>
 								</Tooltip>
 							</TooltipProvider>
@@ -219,9 +221,12 @@ function DashboardContent({
 					type="button"
 					onClick={onRefresh}
 					disabled={isRefreshing}
-					className="mockup-btn-primary"
+					className="inline-flex items-center gap-1.5 h-7 px-3 text-xs font-medium text-muted-foreground border border-border hover:border-[var(--accent)]/40 hover:text-foreground rounded transition-colors disabled:opacity-50"
 				>
-					↻ {isRefreshing ? 'Atualizando...' : 'Atualizar'}
+					<svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+						<path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" />
+					</svg>
+					{isRefreshing ? 'Atualizando...' : 'Atualizar'}
 				</button>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 # SwiftPay Design System
 
-> Dark-first. Minimal. Premium. Data-dense. Professional fintech.
-> Reference: Stripe, Linear, Vercel, Mercury, Revolut, Raycast.
+> Dark mode first. High contrast. Data dense. No decorative noise.
+> Reference quality: Stripe, Linear, Vercel, Mercury, Revolut, Arc Browser, Raycast.
 
 ---
 

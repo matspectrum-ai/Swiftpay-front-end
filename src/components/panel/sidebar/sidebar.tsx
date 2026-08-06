@@ -25,26 +25,33 @@ export function Sidebar({ user }: SidebarProps) {
   const showFull = isMobile ? isOpen : isExpanded;
 
   return (
-    <div className="flex flex-col h-full bg-surface border-r border-border">
-      <div className={`flex items-center border-b border-border shrink-0 transition-all duration-150 ${
-        showFull ? 'px-6 py-5' : 'px-3 py-5 justify-center'
+    <div className="flex flex-col h-full bg-[var(--sidebar)] border-r border-[var(--sidebar-border)]">
+      {/* Logo */}
+      <div className={`flex items-center shrink-0 h-12 border-b border-[var(--sidebar-border)] ${
+        showFull ? 'px-4' : 'justify-center px-0'
       }`}>
         <SidebarLogo />
       </div>
 
-      <div className={`border-b border-border shrink-0 transition-all duration-150 ${
-        showFull ? 'px-4 py-3' : 'px-2 py-3'
+      {/* Merchant selector */}
+      <div className={`shrink-0 border-b border-[var(--sidebar-border)] ${
+        showFull ? 'px-3 py-2' : 'px-2 py-2'
       }`}>
         <SidebarMerchantSelector />
       </div>
 
-      <div className="flex-1 overflow-y-auto py-2 min-h-0">
-        <SidebarMenu sections={menuSections} />
-        <div className={`pt-4 pb-2 border-t border-border mt-6 transition-all duration-150 ${
-          showFull ? 'px-4' : 'px-2'
-        }`}>
-          <SidebarUserInfo />
+      {/* Nav */}
+      <div className="flex-1 overflow-y-auto min-h-0 scrollbar-hide">
+        <div className={`py-2 ${showFull ? 'px-2' : 'px-2'}`}>
+          <SidebarMenu sections={menuSections} />
         </div>
+      </div>
+
+      {/* User */}
+      <div className={`shrink-0 border-t border-[var(--sidebar-border)] ${
+        showFull ? 'px-3 py-3' : 'px-2 py-3'
+      }`}>
+        <SidebarUserInfo />
       </div>
     </div>
   );
