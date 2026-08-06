@@ -1,10 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import "./globals.css";
-import { Inter } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const appUrl =
   process.env.NEXT_PUBLIC_APP_URL ||
@@ -12,7 +8,7 @@ const appUrl =
 const ogImageUrl = new URL("/opengraph.png", appUrl).toString();
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#0b0d11",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -98,11 +94,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
+    <html lang="pt-BR" suppressHydrationWarning className="bg-background font-sans">
       <body className="antialiased" suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
-
