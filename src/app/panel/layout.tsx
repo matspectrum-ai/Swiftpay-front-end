@@ -13,8 +13,7 @@ import { resolveDocsUrl } from '@/constants/useful-links';
 import { SignalRProvider } from '@/contexts/signalr-context';
 import { AuthHubProvider } from '@/providers/auth-hub-provider';
 import { PanelProviders } from '@/components/panel/panel-providers';
-import { UserRole, UserStatus, PaymentEnvironment } from '@/types/enums';
-import { MerchantStatus, MerchantKycStatus, MerchantOnboardingStep } from '@/types/merchant/crud';
+import { UserRole, UserStatus, PaymentEnvironment, MerchantStatus, MerchantKycStatus, MerchantOnboardingStep } from '@/types/enums';
 
 // Usuário mock para visualização do painel sem autenticação (modo auditoria)
 const MOCK_USER: UserInfo = {
