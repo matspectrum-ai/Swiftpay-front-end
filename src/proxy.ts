@@ -21,11 +21,7 @@ export async function proxy(request: NextRequest) {
 	const { pathname } = request.nextUrl;
 	const token = request.cookies.get(BaseCookie.accessToken)?.value;
 
-	if (pathname.startsWith('/panel') && !token) {
-		const loginUrl = new URL('/', request.url);
-		return NextResponse.redirect(loginUrl);
-	}
-
+	// Guard de autenticação desativado para auditoria de design
 	const response = NextResponse.next();
 	response.headers.set('x-pathname', pathname);
 	return response;
