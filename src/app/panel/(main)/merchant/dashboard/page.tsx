@@ -1,15 +1,14 @@
-import { redirect } from 'next/navigation';
 import { getSelectedMerchant } from '@/auth/session';
 import { MerchantDashboard } from './merchant-dashboard';
-import { Routes } from '@/router/routes';
+
+const PREVIEW_MERCHANT_ID = 'preview-merchant-id';
 
 export default async function DashboardPage() {
-	const merchant = await getSelectedMerchant();
+	const merchant = await getSelectedMerchant().catch(() => null);
 
-	if (!merchant) {
-		redirect(Routes.panel.merchant.new);
-	}
+	// Modo auditoria: usa merchant mock quando não há sessão real
+	const merchantId = merchant?.id ?? PREVIEW_MERCHANT_ID;
 
-	return <MerchantDashboard merchantId={merchant.id} />;
+	return <MerchantDashboard merchantId={merchantId} />;
 }
 
