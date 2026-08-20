@@ -15,6 +15,7 @@ done
 
 cd current-dashboard
 npm install --include=dev --no-audit --no-fund
+npm install --no-save --include=dev --no-audit --no-fund typescript@7.0.2
 VITE_SUPABASE_URL="https://preview.invalid.supabase.co" \
 VITE_SUPABASE_PUBLISHABLE_KEY="preview-public-key" \
 npm run build
