@@ -14,7 +14,7 @@ for file in api-base.ts api.ts app-base.tsx app.tsx auth.ts main.tsx styles.css;
 done
 
 cd current-dashboard
-npm install --no-audit --no-fund
+npm install --include=dev --no-audit --no-fund
 VITE_SUPABASE_URL="https://preview.invalid.supabase.co" \
 VITE_SUPABASE_PUBLISHABLE_KEY="preview-public-key" \
 npm run build
