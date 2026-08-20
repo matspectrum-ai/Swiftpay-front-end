@@ -1,7 +1,7 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "installCommand": "npm ci",
+  "framework": "vite",
+  "buildCommand": "cd current-dashboard && VITE_SUPABASE_URL=https://preview.invalid.supabase.co VITE_SUPABASE_PUBLISHABLE_KEY=preview-public-key npm run build",
+  "outputDirectory": "current-dashboard/dist",
+  "installCommand": "cd current-dashboard && npm install",
   "regions": ["gru1"]
 }
